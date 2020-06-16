@@ -3,7 +3,7 @@
 Plugin Name: GP Social Share
 Plugin URI: https://github.com/WestCoastDigital/gp-social-share
 Description: Add social share icons to single posts within GeneratePress
-Version: 2.0
+Version: 2.0-beta1.0
 Author: West Coast Digital
 Author URI: https://westcoastdigital.com.au
 Text Domain: gp-social

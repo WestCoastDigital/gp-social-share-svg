@@ -386,10 +386,11 @@ function gp_social_disable_hook_render()
 function gp_social_hook_locations_render(  )
 { 
     $options = get_option( 'gp_social_settings' );
-    $hooks = gp_social_gp_hooks(); ?>
+    $hooks = gp_social_gp_hooks();
+    $location = isset($options['hook_locations']) ? esc_attr($options['hook_locations']) : 'generate_after_content'; ?>
     <select class="select-hook" name='gp_social_settings[hook_locations]'>
     <?php foreach ( $hooks as $hook ) { ?>
-        <option value="<?php echo $hook; ?>" <?php selected( isset($options['hook_locations']), $hook ); ?>><?php echo $hook; ?></option>
+        <option value="<?php echo $hook; ?>" <?php if( $location == $hook ) { echo 'selected'; }; ?>><?php echo $hook; ?></option>
     <?php } ?>
     </select>
 
@@ -619,13 +620,14 @@ function social_share_filter() {
 
     global $post;
     $id = get_the_ID();
+    $post_object = get_post( $id );
+    $content = apply_filters( 'the_content', $post_object->post_content );
     $title = get_the_title( $id );
     $url = urlencode( get_permalink( $id ) );
-    $excerpt = wp_trim_words( do_shortcode(get_the_content( $id )), 40 );
+    $excerpt = wp_trim_words( $content, 40 );
     $thumbnail = get_the_post_thumbnail_url( $id, 'full' );
     $author_id = $post->post_author;
     $author = get_the_author_meta( 'display_name' , $author_id );
-
     $options = get_option('gp_social_settings');
 
     $facebook = isset($options['facebook_icon']) ? esc_attr($options['facebook_icon']) : gp_social_default_facebook();
