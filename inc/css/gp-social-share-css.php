@@ -3,20 +3,19 @@
 defined( 'ABSPATH' ) or die( 'Cannot access pages directly.' );
 
 function gp_social_css() {
-    $fb_color = rwmb_meta( 'fb_color', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $fb_color_hover = rwmb_meta( 'fb_color_hover', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $tw_color = rwmb_meta( 'tw_color', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $tw_color_hover = rwmb_meta( 'tw_color_hover', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $li_color = rwmb_meta( 'li_color', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $li_color_hover = rwmb_meta( 'li_color_hover', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $pin_color = rwmb_meta( 'pin_color', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $pin_color_hover = rwmb_meta( 'pin_color_hover', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $gp_color = rwmb_meta( 'gp_color', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $gp_color_hover = rwmb_meta( 'gp_color_hover', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $em_color = rwmb_meta( 'em_color', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $em_color_hover = rwmb_meta( 'em_color_hover', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $wa_color = rwmb_meta( 'wa_color', array( 'object_type' => 'setting' ), 'gp_social_settings' );
-    $wa_color_hover = rwmb_meta( 'wa_color_hover', array( 'object_type' => 'setting' ), 'gp_social_settings' );
+    $options = get_option('gp_social_settings');
+    $fb_color = isset($options['facebook_colour']) ? esc_attr($options['facebook_colour']) : gp_social_default_icon_color();
+    $fb_color_hover = isset($options['facebook_hover_colour']) ? esc_attr($options['facebook_hover_colour']) : '#1e73be';
+    $tw_color = isset($options['twitter_colour']) ? esc_attr($options['twitter_colour']) : gp_social_default_icon_color();
+    $tw_color_hover = isset($options['twitter_hover_colour']) ? esc_attr($options['twitter_hover_colour']) : '#00acee';
+    $li_color = isset($options['linkedin_colour']) ? esc_attr($options['linkedin_colour']) : gp_social_default_icon_color();
+    $li_color_hover = isset($options['linkedin_hover_colour']) ? esc_attr($options['linkedin_hover_colour']) : '#0077b5';
+    $pin_color = isset($options['pinterest_colour']) ? esc_attr($options['pinterest_colour']) : gp_social_default_icon_color();
+    $pin_color_hover = isset($options['pinterest_hover_colour']) ? esc_attr($options['pinterest_hover_colour']) : '#c92228';
+    $em_color = isset($options['email_colour']) ? esc_attr($options['email_colour']) : gp_social_default_icon_color();
+    $em_color_hover = isset($options['email_hover_colour']) ? esc_attr($options['email_hover_colour']) : '#f1f1d4';
+    $wa_color = isset($options['whatsapp_colour']) ? esc_attr($options['whatsapp_colour']) : gp_social_default_icon_color();
+    $wa_color_hover = isset($options['whatsapp_hover_colour']) ? esc_attr($options['whatsapp_hover_colour']) : '#075e54';
 
     $custom_css = "
         #gp-social-share a.fb-share svg {
@@ -42,12 +41,6 @@ function gp_social_css() {
         }
         #gp-social-share a.pt-share:hover svg {
             fill: {$pin_color_hover};
-        }
-        #gp-social-share a.gp-share svg {
-            fill: {$gp_color};
-        }
-        #gp-social-share a.gp-share:hover svg {
-            fill: {$gp_color_hover};
         }
         #gp-social-share a.em-share svg {
             fill: {$em_color};
