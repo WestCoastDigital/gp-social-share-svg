@@ -3,7 +3,7 @@ Contributors: WestCoastDigital
 Tags: social, share, svg
 Requires at least: 4.6
 Tested up to: 5.4.2
-Stable tag: 1.2
+Stable tag: 2.0
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -104,6 +104,10 @@ No. WordPress has SVG disabled by default due to potential security issues, the 
 3. Settings
 
 == Changelog ==
+= 2.0.1 =
+Added support to customise on a post by post basis
+Bug Fix Shortcode
+
 = 2.0 =
 Rebuilt backend to remove relying on third party plugins
 
