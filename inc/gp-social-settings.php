@@ -231,7 +231,7 @@ function gp_social_facebook_icon_render()
 {
     $options = get_option('gp_social_settings');
     ?>
-	<textarea cols='40' rows='5' name='gp_social_settings[facebook_icon]'><?php echo isset($options['facebook_icon']) ? esc_attr($options['facebook_icon']) : gp_social_default_facebook(); ?></textarea>
+	<textarea cols='80' rows='5' name='gp_social_settings[facebook_icon]'><?php echo isset($options['facebook_icon']) ? esc_attr($options['facebook_icon']) : gp_social_default_facebook(); ?></textarea>
 	<?php
 }
 
@@ -239,7 +239,7 @@ function gp_social_twitter_icon_render()
 {
     $options = get_option('gp_social_settings');
     ?>
-	<textarea cols='40' rows='5' name='gp_social_settings[twitter_icon]'><?php echo isset($options['twitter_icon']) ? esc_attr($options['twitter_icon']) : gp_social_default_twitter(); ?></textarea>
+	<textarea cols='80' rows='5' name='gp_social_settings[twitter_icon]'><?php echo isset($options['twitter_icon']) ? esc_attr($options['twitter_icon']) : gp_social_default_twitter(); ?></textarea>
 	<?php
 }
 
@@ -247,7 +247,7 @@ function gp_social_linkedin_icon_render()
 {
     $options = get_option('gp_social_settings');
     ?>
-	<textarea cols='40' rows='5' name='gp_social_settings[linkedin_icon]'><?php echo isset($options['linkedin_icon']) ? esc_attr($options['linkedin_icon']) : gp_social_default_linkedin(); ?></textarea>
+	<textarea cols='80' rows='5' name='gp_social_settings[linkedin_icon]'><?php echo isset($options['linkedin_icon']) ? esc_attr($options['linkedin_icon']) : gp_social_default_linkedin(); ?></textarea>
 	<?php
 }
 
@@ -255,7 +255,7 @@ function gp_social_pinterest_icon_render()
 {
     $options = get_option('gp_social_settings');
     ?>
-	<textarea cols='40' rows='5' name='gp_social_settings[pinterest_icon]'><?php echo isset($options['pinterest_icon']) ? esc_attr($options['pinterest_icon']) : gp_social_default_pinterest(); ?></textarea>
+	<textarea cols='80' rows='5' name='gp_social_settings[pinterest_icon]'><?php echo isset($options['pinterest_icon']) ? esc_attr($options['pinterest_icon']) : gp_social_default_pinterest(); ?></textarea>
 	<?php
 }
 
@@ -263,7 +263,7 @@ function gp_social_whatsapp_icon_render()
 {
     $options = get_option('gp_social_settings');
     ?>
-	<textarea cols='40' rows='5' name='gp_social_settings[whatsapp_icon]'><?php echo isset($options['whatsapp_icon']) ? esc_attr($options['whatsapp_icon']) : gp_social_default_whatsapp(); ?></textarea>
+	<textarea cols='80' rows='5' name='gp_social_settings[whatsapp_icon]'><?php echo isset($options['whatsapp_icon']) ? esc_attr($options['whatsapp_icon']) : gp_social_default_whatsapp(); ?></textarea>
 	<?php
 }
 
@@ -271,7 +271,7 @@ function gp_social_email_icon_render()
 {
     $options = get_option('gp_social_settings');
     ?>
-	<textarea cols='40' rows='5' name='gp_social_settings[email_icon]'><?php echo isset($options['email_icon']) ? esc_attr($options['email_icon']) : gp_social_default_email(); ?></textarea>
+	<textarea cols='80' rows='5' name='gp_social_settings[email_icon]'><?php echo isset($options['email_icon']) ? esc_attr($options['email_icon']) : gp_social_default_email(); ?></textarea>
 	<?php
 }
 
@@ -400,10 +400,11 @@ function gp_social_hook_locations_render(  )
 function gp_social_woo_global_render(  )
 { 
     $options = get_option( 'gp_social_settings' );
-    $hooks = gp_social_wc_global_hooks(); ?>
+    $hooks = gp_social_wc_global_hooks();
+    $location = isset($options['gp_woo_single_hook']) ? esc_attr($options['gp_woo_single_hook']) : ''; ?>
     <select class="select-hook" name='gp_social_settings[gp_woo_single_hook]'>
     <?php foreach ( $hooks as $hook ) { ?>
-        <option value="<?php echo $hook; ?>" <?php selected( isset($options['gp_woo_single_hook']), $hook ); ?>><?php echo $hook; ?></option>
+        <option value="<?php echo $hook; ?>" <?php if( $location == $hook ) { echo 'selected'; }; ?>><?php echo $hook; ?>><?php echo $hook; ?></option>
     <?php } ?>
     </select>
 
@@ -413,10 +414,11 @@ function gp_social_woo_global_render(  )
 function gp_social_woo_single_render(  )
 { 
     $options = get_option( 'gp_social_settings' );
-    $hooks = gp_social_wc_single_hooks(); ?>
+    $hooks = gp_social_wc_single_hooks();
+    $location = isset($options['gp_woo_global_hook']) ? esc_attr($options['gp_woo_global_hook']) : ''; ?>
     <select class="select-hook" name='gp_social_settings[gp_woo_global_hook]'>
     <?php foreach ( $hooks as $hook ) { ?>
-        <option value="<?php echo $hook; ?>" <?php selected( isset($options['gp_woo_global_hook']), $hook ); ?>><?php echo $hook; ?></option>
+        <option value="<?php echo $hook; ?>" <?php if( $location == $hook ) { echo 'selected'; }; ?>><?php echo $hook; ?>><?php echo $hook; ?></option>
     <?php } ?>
     </select>
 
@@ -532,17 +534,25 @@ function gp_social_options_page()
 {
 
     ?>
-    <style>.switch{position:relative;display:inline-block;width:60px;height:34px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#ccc;-webkit-transition:.4s;-o-transition:.4s;transition:.4s}.slider:before{position:absolute;content:"";height:26px;width:26px;left:4px;bottom:4px;background-color:#fff;-webkit-transition:.4s;-o-transition:.4s;transition:.4s}input:checked+.slider{background-color:#2196f3}input:focus+.slider{-webkit-box-shadow:0 0 1px #2196f3;box-shadow:0 0 1px #2196f3}input:checked+.slider:before{-webkit-transform:translateX(26px);-ms-transform:translateX(26px);transform:translateX(26px)}.slider.round{border-radius:34px}.slider.round:before{border-radius:50%}span.wp-picker-input-wrap{margin-top:10px}button.button.wp-color-result{width:100px}.wp-picker-container.wp-picker-active{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.iris-picker.iris-border{margin-top:10px}.wrapper{display:-ms-grid;display:grid;-ms-grid-columns:28% 20px auto;grid-template-columns:28% auto;grid-column-gap:20px;margin-top:58px}.sidebar-wrapper{background:#fff;border:1px solid #999;padding:6px}.form-table{display:none}.gp-social-settings h2{display:none}</style>
-    <script>jQuery(document).ready(function(e){e("input.color-picker").wpColorPicker(),e(".select-hook").select2({width:"resolve",placeholder:"Select an option"}),e(".gp-social-settings .form-table").each(function(){var t=e(this).prev("h2").html().toLowerCase().replace(/\s+/g,"-");e(this).attr("id",t)}),e("table#icon-settings").show(),e("table#icon-settings").prev("h2").show(),e(".toggle-settings").click(function(t){t.preventDefault();var o="table#"+e(this).attr("id");e("table.form-table").hide(),e("table.form-table").prev("h2").hide(),e(o).show(),e(o).prev("h2").show()})});</script>
+    <style>.switch{position:relative;display:inline-block;width:60px;height:34px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#ccc;-webkit-transition:.4s;-o-transition:.4s;transition:.4s}.slider:before{position:absolute;content:"";height:26px;width:26px;left:4px;bottom:4px;background-color:#fff;-webkit-transition:.4s;-o-transition:.4s;transition:.4s}input:checked+.slider{background-color:#2196f3}input:focus+.slider{-webkit-box-shadow:0 0 1px #2196f3;box-shadow:0 0 1px #2196f3}input:checked+.slider:before{-webkit-transform:translateX(26px);-ms-transform:translateX(26px);transform:translateX(26px)}.slider.round{border-radius:34px}.slider.round:before{border-radius:50%}span.wp-picker-input-wrap{margin-top:10px}button.button.wp-color-result{width:100px}.wp-picker-container.wp-picker-active{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.iris-picker.iris-border{margin-top:10px}.wrapper{display:-ms-grid;display:grid;-ms-grid-columns:auto 20px 28%;grid-template-columns:auto 28%;grid-column-gap:20px;margin-top:58px;padding-right:20px;}.sidebar-wrapper{background:#fff;border:1px solid #999;padding:6px}.form-table{display:none}.gp-social-settings h2{display:none}#button-wrapper{margin-bottom:50px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.toggle-settings{border-bottom:1px solid #ccc;text-decoration:none;padding:10px 20px;color:#23282d}.toggle-settings:focus{-webkit-box-shadow:none;box-shadow:none}.toggle-settings.active{border:1px solid #ccc;border-bottom-color:transparent;border-top-left-radius:4px;border-top-right-radius:4px;color:#0073aa}</style>
+    <script>jQuery(document).ready(function(e){e("a#icon-settings").addClass("active"),e("input.color-picker").wpColorPicker(),e(".select-hook").select2({width:"resolve",placeholder:"Select an option"}),e(".gp-social-settings .form-table").each(function(){var t=e(this).prev("h2").html().toLowerCase().replace(/\s+/g,"-");e(this).attr("id",t).add}),e("table#icon-settings").show(),e("table#icon-settings").prev("h2").show(),e(".toggle-settings").click(function(t){t.preventDefault();var s="table#"+e(this).attr("id");e("table.form-table").hide(),e("table.form-table").prev("h2").hide(),e(s).show(),e(s).prev("h2").show()}),e(".toggle-settings").click(function(t){e(".toggle-settings").removeClass("active"),e(this).addClass("active")})});</script>
     <div class="wrapper">
+		<form class="gp-social-settings" action='options.php' method='post'>
+            <div id="button-wrapper">
+                    <a id="icon-settings" href="#" class="toggle-settings"><?php echo __('Icon Settings'); ?></a>
+                    <a id="colour-settings" href="#" class="toggle-settings"><?php echo __('Colour Settings'); ?></a>
+                    <a id="output-settings" href="#" class="toggle-settings"><?php echo __('Custom Settings'); ?></a>
+            </div>
+            <?php
+            settings_fields('gp_social_icons');
+            do_settings_sections('gp_social_icons');
+            submit_button();
+            ?>
+		</form>
         <div id="sidebar">
             <div class="sidebar-wrapper">
                 <h2>GP Social Share Settings</h2>
-                <div id="button-wrapper">
-                    <p><a id="icon-settings" href="#" class="button toggle-settings"><?php echo __('Icon Settings'); ?></a></p>
-                    <p><a id="colour-settings" href="#" class="button toggle-settings"><?php echo __('Colour Settings'); ?></a></p>
-                    <p><a id="output-settings" href="#" class="button toggle-settings"><?php echo __('Custom Settings'); ?></a></p>
-                </div>
+            
                 <h3><?php echo __('Contact'); ?></h3>
                 <p>Don't hesitate to <a href="mailto:jon@westcoastdigital.com.au" target="_blank">contact me</a> to request new features, ask questions, or just say hi.</p>
                 <h3>Other West Coast Digtal Plugins</h3>
@@ -561,13 +571,6 @@ function gp_social_options_page()
                 </form>
             </div>
 		</div>
-		<form class="gp-social-settings" action='options.php' method='post'>
-            <?php
-            settings_fields('gp_social_icons');
-            do_settings_sections('gp_social_icons');
-            submit_button();
-            ?>
-		</form>
     </div>
 		<?php
 
@@ -621,11 +624,16 @@ function social_share_filter() {
     global $post;
     $id = get_the_ID();
     $post_object = get_post( $id );
-    $content = apply_filters( 'the_content', $post_object->post_content );
+    
+
+    $twitter_meta = get_post_meta( $post->ID, 'gp_social_share_twitter-content', true );
+    $email_meta = get_post_meta( $post->ID, 'gp_social_share_email-content', true );
+    $image_meta = get_post_meta( $post->ID, 'gp_social_share_social-share-image', true );
+
     $title = get_the_title( $id );
     $url = urlencode( get_permalink( $id ) );
-    $excerpt = wp_trim_words( $content, 40 );
-    $thumbnail = get_the_post_thumbnail_url( $id, 'full' );
+    //$excerpt = wp_trim_words( $content, 40 );
+    $thumbnail = $image_meta ? $image_meta : get_the_post_thumbnail_url( $id, 'full' );
     $author_id = $post->post_author;
     $author = get_the_author_meta( 'display_name' , $author_id );
     $options = get_option('gp_social_settings');
@@ -643,11 +651,7 @@ function social_share_filter() {
     // Add support to change email body
     if( !$custom_email ) {
         if ( !function_exists( 'gp_social_email_body' ) ) {
-            $email_body = __('Check out this awesome article', 'gp-social');
-            if( !$disable_author) {
-                $email_body .= ' by ' . $author ;
-            }
-            $email_body .= '. ' . $url;
+            $email_body = $email_meta;
         } else {
             $email_body = gp_social_email_body();
         }
@@ -670,7 +674,7 @@ function social_share_filter() {
     if ( function_exists( 'gp_social_twitter_link' ) ) {
         $twitter_link = gp_social_twitter_link();
     } else {
-        $twitter_link = '<a href="https://twitter.com/share?url=' . $url . '&text=' . $excerpt . '" class="tw-share" title="' . __( 'Tweet this post!', 'gp-social' ) . '">' . html_entity_decode($twitter) . '</a>';
+        $twitter_link = '<a href="https://twitter.com/share?url=' . $url . '&text=' . $twitter_meta . '" class="tw-share" title="' . __( 'Tweet this post!', 'gp-social' ) . '">' . html_entity_decode($twitter) . '</a>';
     }
     
     // Add support to change linkedin link
@@ -773,9 +777,203 @@ function add_social_icons() {
 }// add_social_icons
 
 // Create shortcode
-function social_shortcode() {
+function gp_social_shortcode() {
     wp_enqueue_style( 'social-share-css' );
     wp_enqueue_script( 'social-share-js' );
     return social_share_filter();
 }
-add_shortcode( 'gp-social', 'social_shortcode' );
+add_shortcode( 'gp-social', 'gp_social_shortcode' );
+
+class GPSocialMetaBoxes {
+	private $screens = array(
+        'post',
+        'product',
+    );
+
+	private $fields = array(
+		array(
+			'id' => 'twitter-content',
+            'label' => 'Twitter Content',
+            'description' => 'Leave blank for excerpt',
+            'type' => 'textarea',
+		),
+		array(
+			'id' => 'email-content',
+			'label' => 'Email Content',
+            'description' => 'Leave blank for default email body',
+			'type' => 'textarea',
+		),
+		array(
+			'id' => 'social-share-image',
+			'label' => 'Social Share Image',
+            'description' => '',
+			'type' => 'media',
+		),
+	);
+
+	/**
+	 * Class construct method. Adds actions to their respective WordPress hooks.
+	 */
+	public function __construct() {
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+		add_action( 'admin_footer', array( $this, 'admin_footer' ) );
+		add_action( 'save_post', array( $this, 'save_post' ) );
+	}
+
+	/**
+	 * Hooks into WordPress' add_meta_boxes function.
+	 * Goes through screens (post types) and adds the meta box.
+	 */
+	public function add_meta_boxes() {
+		foreach ( $this->screens as $screen ) {
+			add_meta_box(
+				'gp-social-share',
+				__( 'GP Social Share', 'generatepress' ),
+				array( $this, 'add_meta_box_callback' ),
+				$screen,
+				'side',
+				'default'
+			);
+		}
+	}
+
+	/**
+	 * Generates the HTML for the meta box
+	 * 
+	 * @param object $post WordPress post object
+	 */
+	public function add_meta_box_callback( $post ) {
+		wp_nonce_field( 'gp_social_share_data', 'gp_social_share_nonce' );
+		$this->generate_fields( $post );
+	}
+
+	/**
+	 * Hooks into WordPress' admin_footer function.
+	 * Adds scripts for media uploader.
+	 */
+	public function admin_footer() {
+		?><script>
+			// https://codestag.com/how-to-use-wordpress-3-5-media-uploader-in-theme-options/
+			jQuery(document).ready(function($){
+				if ( typeof wp.media !== 'undefined' ) {
+					var _custom_media = true,
+					_orig_send_attachment = wp.media.editor.send.attachment;
+					$('.rational-metabox-media').click(function(e) {
+						var send_attachment_bkp = wp.media.editor.send.attachment;
+						var button = $(this);
+						var id = button.attr('id').replace('_button', '');
+						_custom_media = true;
+							wp.media.editor.send.attachment = function(props, attachment){
+							if ( _custom_media ) {
+								$("#"+id).val(attachment.url);
+							} else {
+								return _orig_send_attachment.apply( this, [props, attachment] );
+							};
+						}
+						wp.media.editor.open(button);
+						return false;
+					});
+					$('.add_media').on('click', function(){
+						_custom_media = false;
+					});
+				}
+			});
+		</script><?php
+	}
+
+	/**
+	 * Generates the field's HTML for the meta box.
+	 */
+	public function generate_fields( $post ) {
+		$output = '';
+		foreach ( $this->fields as $field ) {
+			$label = '<label for="' . $field['id'] . '">' . $field['label'] . '<small style="display: block;"><em>' . $field['description'] . '</em></small></label>';
+            $db_value = get_post_meta( $post->ID, 'gp_social_share_' . $field['id'], true );
+            if( $field['id'] == 'twitter-content' ) {
+                if( $db_value != '' ) {
+                    $textarea = $db_value;
+                } else {
+                    $textarea = get_the_excerpt();
+                }
+            } elseif($field['id'] == 'email-content' ) {
+                if( $db_value != '' ) {
+                    $textarea = $db_value;
+                } else {
+                    $textarea = __('Check out this awesome article', 'gp-social') . ' by ' . get_the_author() . ' on ' . get_permalink();
+                }
+            } else {
+
+            }
+			switch ( $field['type'] ) {
+				case 'checkbox':
+					$input = sprintf(
+						'<input %s id="%s" name="%s" type="checkbox" value="1">',
+						$db_value === '1' ? 'checked' : '',
+						$field['id'],
+						$field['id']
+					);
+					break;
+				case 'media':
+					$input = sprintf(
+						'<input id="%s" name="%s" type="text" value="%s"> <input class="button rational-metabox-media" id="%s_button" name="%s_button" type="button" value="Upload" />',
+						$field['id'],
+						$field['id'],
+						$db_value,
+						$field['id'],
+						$field['id']
+					);
+					break;
+				case 'textarea':
+					$input = sprintf(
+						'<textarea id="%s" name="%s" rows="5">%s</textarea>',
+						$field['id'],
+						$field['id'],
+						$textarea
+					);
+					break;
+				default:
+					$input = sprintf(
+						'<input id="%s" name="%s" type="%s" value="%s">',
+						$field['id'],
+						$field['id'],
+						$field['type'],
+						$db_value
+					);
+			}
+			$output .= '<p>' . $label . '<br>' . $input . '</p>';
+		}
+		echo $output;
+	}
+
+	/**
+	 * Hooks into WordPress' save_post function
+	 */
+	public function save_post( $post_id ) {
+		if ( ! isset( $_POST['gp_social_share_nonce'] ) )
+			return $post_id;
+
+		$nonce = $_POST['gp_social_share_nonce'];
+		if ( !wp_verify_nonce( $nonce, 'gp_social_share_data' ) )
+			return $post_id;
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			return $post_id;
+
+		foreach ( $this->fields as $field ) {
+			if ( isset( $_POST[ $field['id'] ] ) ) {
+				switch ( $field['type'] ) {
+					case 'email':
+						$_POST[ $field['id'] ] = sanitize_email( $_POST[ $field['id'] ] );
+						break;
+					case 'text':
+						$_POST[ $field['id'] ] = sanitize_text_field( $_POST[ $field['id'] ] );
+						break;
+				}
+				update_post_meta( $post_id, 'gp_social_share_' . $field['id'], $_POST[ $field['id'] ] );
+			} else if ( $field['type'] === 'checkbox' ) {
+				update_post_meta( $post_id, 'gp_social_share_' . $field['id'], '0' );
+			}
+		}
+	}
+}
+new GPSocialMetaBoxes;
